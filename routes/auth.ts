@@ -1,7 +1,6 @@
-// src/routes/auth.ts
 import { Router, Request, Response } from "express";
 import _ from "lodash";
-import User from "../models/user"; // Ensure this import is correctly linked to your User model
+import User from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -22,7 +21,7 @@ router.post("/register", async (req: Request, res: Response) => {
     await user.save();
     res
       .status(201)
-      .send({ userId: user._id, username: user.username, email: user.email }); // Respond with useful user information excluding the password
+      .send({ userId: user._id, username: user.username, email: user.email });
   } catch (err) {
     res.status(500).json({ message: "Error registering new user", error: err });
   }
