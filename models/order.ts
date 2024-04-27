@@ -1,17 +1,15 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-// Define an interface for the product in the order
 interface IProduct {
   productId: string;
   quantity: number;
 }
 
-// Define an interface for the order document
 interface IOrder extends Document {
   userId: string;
   products: IProduct[];
   amount: number;
-  address: Record<string, any>; // You can replace `any` with more specific type if the address structure is known
+  address: Record<string, any>;
   status: string;
 }
 
@@ -32,7 +30,7 @@ const orderSchema: Schema = new mongoose.Schema({
     },
   ],
   amount: { type: Number, required: true },
-  address: { type: Object, required: true }, // Consider more specific typing if possible
+  address: { type: Object, required: true },
   status: { type: String, default: "pending" },
 });
 

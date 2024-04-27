@@ -1,14 +1,13 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-// Define an interface for the User document that extends mongoose's Document
-interface IUser extends Document {
+export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
   isAdmin: boolean;
 }
 
-const userSchema: Schema = new mongoose.Schema(
+const userSchema: Schema<IUser> = new mongoose.Schema(
   {
     username: {
       type: String,
