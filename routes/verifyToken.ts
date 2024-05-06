@@ -1,13 +1,11 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-// Define a more specific type for the user object if possible
 interface UserPayload {
   id: string;
   isAdmin: boolean;
 }
 
-// Extend the Request interface to include the user payload
 interface RequestWithUser extends Request {
   user?: UserPayload;
 }
@@ -40,7 +38,6 @@ export const verifyTokenAndAuthorization = (
   next: NextFunction
 ): void => {
   verifyToken(req, res, () => {
-    // Ensure req.user and the necessary fields are defined
     if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
       next();
     } else {
