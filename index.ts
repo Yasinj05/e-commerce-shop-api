@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/users";
 import authRoute from "./routes/auth";
+import productRoute from "./routes/products";
 
 const app: Express = express();
 
@@ -11,6 +12,7 @@ dotenv.config();
 app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/products", productRoute);
 
 const PORT: string | number = process.env.PORT || 8000;
 app.listen(PORT, () => {
