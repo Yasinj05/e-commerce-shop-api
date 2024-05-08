@@ -45,3 +45,17 @@ export const verifyTokenAndAuthorization = (
     }
   });
 };
+
+export const verifyTokenAndAdmin = (
+  req: RequestWithUser,
+  res: Response,
+  next: NextFunction
+): void => {
+  verifyToken(req, res, () => {
+    if (req.user && req.user.isAdmin) {
+      next();
+    } else {
+      res.status(403).json("You are not allowed to do that!");
+    }
+  });
+};
