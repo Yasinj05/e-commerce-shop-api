@@ -5,7 +5,7 @@ interface IProduct {
   quantity: number;
 }
 
-interface ICart extends Document {
+export interface ICart extends Document {
   userId: string;
   products: IProduct[];
 }
