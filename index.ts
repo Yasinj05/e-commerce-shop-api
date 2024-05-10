@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import userRoute from "./routes/users";
 import authRoute from "./routes/auth";
 import productRoute from "./routes/products";
+import orderRoute from "./routes/orders";
+import cartRoute from "./routes/carts";
+import stripeRoute from "./routes/stripe";
 
 const app: Express = express();
 
@@ -13,6 +16,9 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
+app.use("/api/carts", cartRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/checkout", stripeRoute);
 
 const PORT: string | number = process.env.PORT || 8000;
 app.listen(PORT, () => {
