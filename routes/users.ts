@@ -65,10 +65,8 @@ router.put(
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         { $set: req.body },
-        { new: true }
-      )
-        .select("-password")
-        .lean<IUser>();
+        { new: true, select: "-password" }
+      ).lean<IUser>();
       res.status(200).json(updatedUser);
     } catch (err) {
       sendErrorResponse(res, 500, "Error updating user", err);
@@ -114,14 +112,44 @@ router.get(
   "/",
   verifyTokenAndAdmin,
   async (req: RequestWithUser, res: Response) => {
-    const query = req.query.new as string;
+    const isNew = req.query.new as string;
     try {
-      const users = query
+      const users = isNew
         ? await User.find().sort({ _id: -1 }).limit(5).lean<IUser[]>()
         : await User.find().lean<IUser[]>();
       res.status(200).json(users);
     } catch (err) {
       sendErrorResponse(res, 500, "Error retrieving users", err);
+    }
+  }
+);
+
+// GET USER STATS
+router.get(
+  "/stats",
+  verifyTokenAndAdmin,
+  async (req: Request, res: Response) => {
+    const date = new Date();
+    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+    try {
+      const data = await User.aggregate([
+        { $match: { createdAt: { $gte: lastYear } } },
+        {
+          $project: {
+            month: { $month: "$createdAt" },
+          },
+        },
+        {
+          $group: {
+            _id: "$month",
+            total: { $sum: 1 },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (err) {
+      sendErrorResponse(res, 500, "Error getting user stats", err);
     }
   }
 );
