@@ -2,7 +2,7 @@
 
 This is an E-Commerce platform backend developed using Express.js and TypeScript, with MongoDB for the database and Stripe for payment processing.
 
-## Features
+## Features 💡
 
 - **User Authentication**: JWT-based authentication for user login and registration.
 - **Product Management**: Create, read, update, and delete products.
@@ -11,15 +11,15 @@ This is an E-Commerce platform backend developed using Express.js and TypeScript
 - **Payment Processing**: Integrated with Stripe for secure payments.
 - **Admin Functions**: Additional functionalities for admins to manage users, products, and orders.
 
-## Getting Started
+## Getting Started 🚀
 
-### Prerequisites
+### Prerequisites ⚙️
 
 - Node.js and npm installed
 - MongoDB instance running
 - Stripe account for payment processing
 
-### Installation
+### Installation 📥
 
 1. Clone the repository:
 
@@ -69,7 +69,7 @@ npm start dev
 
 The API will be available at http://localhost:8000.
 
-## API Endpoints
+## API Endpoints 🖇️
 
 ### User Endpoints
 
@@ -112,6 +112,6 @@ The API will be available at http://localhost:8000.
 
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
 
-## License
+## License ⚖️
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
