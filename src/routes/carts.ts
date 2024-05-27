@@ -5,6 +5,8 @@ import {
   verifyTokenAndAdmin,
 } from "./verifyToken";
 import Cart from "../models/cart";
+import validate from "../validations/validate";
+import cartSchema from "../validations/cartValidation";
 
 const router: Router = express.Router();
 
@@ -37,20 +39,26 @@ function sendErrorResponse(
 }
 
 // CREATE Cart
-router.post("/", verifyToken, async (req: RequestWithCart, res: Response) => {
-  const newCart = new Cart(req.body);
-  try {
-    const savedCart = await newCart.save();
-    res.status(201).json(savedCart);
-  } catch (err) {
-    sendErrorResponse(res, 500, "Error saving cart", err);
+router.post(
+  "/",
+  verifyToken,
+  validate(cartSchema),
+  async (req: RequestWithCart, res: Response) => {
+    const newCart = new Cart(req.body);
+    try {
+      const savedCart = await newCart.save();
+      res.status(201).json(savedCart);
+    } catch (err) {
+      sendErrorResponse(res, 500, "Error saving cart", err);
+    }
   }
-});
+);
 
 // UPDATE Cart
 router.put(
   "/:id",
   verifyTokenAndAuthorization,
+  validate(cartSchema),
   async (req: RequestWithCart, res: Response) => {
     try {
       const updatedCart = await Cart.findByIdAndUpdate(

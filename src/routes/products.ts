@@ -4,6 +4,8 @@ import {
   verifyTokenAndAdmin,
 } from "./verifyToken";
 import Product, { IProduct } from "../models/product";
+import validate from "../validations/validate";
+import productSchema from "../validations/productValidation";
 
 const router: Router = express.Router();
 
@@ -42,6 +44,7 @@ function sendErrorResponse(
 router.post(
   "/",
   verifyTokenAndAdmin,
+  validate(productSchema),
   async (req: RequestWithProduct, res: Response) => {
     const newProduct = new Product(req.body);
     try {
@@ -57,6 +60,7 @@ router.post(
 router.put(
   "/:id",
   verifyTokenAndAdmin,
+  validate(productSchema),
   async (req: RequestWithProduct, res: Response) => {
     try {
       const updatedProduct = await Product.findByIdAndUpdate(

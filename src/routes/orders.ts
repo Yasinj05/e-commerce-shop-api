@@ -5,6 +5,8 @@ import {
   verifyTokenAndAdmin,
 } from "./verifyToken";
 import Order, { IOrder } from "../models/order";
+import validate from "../validations/validate";
+import orderSchema from "../validations/orderValidation";
 
 const router: Router = express.Router();
 
@@ -37,20 +39,26 @@ function sendErrorResponse(
 }
 
 // CREATE Order
-router.post("/", verifyToken, async (req: RequestWithOrder, res: Response) => {
-  const newOrder = new Order(req.body);
-  try {
-    const savedOrder = await newOrder.save();
-    res.status(201).json(savedOrder);
-  } catch (err) {
-    sendErrorResponse(res, 500, "Error saving order", err);
+router.post(
+  "/",
+  verifyToken,
+  validate(orderSchema),
+  async (req: RequestWithOrder, res: Response) => {
+    const newOrder = new Order(req.body);
+    try {
+      const savedOrder = await newOrder.save();
+      res.status(201).json(savedOrder);
+    } catch (err) {
+      sendErrorResponse(res, 500, "Error saving order", err);
+    }
   }
-});
+);
 
 // UPDATE Order
 router.put(
   "/:id",
   verifyTokenAndAdmin,
+  validate(orderSchema),
   async (req: RequestWithOrder, res: Response) => {
     try {
       const updatedOrder = await Order.findByIdAndUpdate(
