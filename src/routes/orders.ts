@@ -4,7 +4,7 @@ import {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } from "./verifyToken";
-import Order, { IOrder } from "../models/order";
+import Order, { IOrder } from "../models/Order";
 import validate from "../validations/validate";
 import orderSchema from "../validations/orderValidation";
 

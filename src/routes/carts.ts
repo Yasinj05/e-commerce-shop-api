@@ -4,7 +4,7 @@ import {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } from "./verifyToken";
-import Cart from "../models/cart";
+import Cart from "../models/Cart";
 import validate from "../validations/validate";
 import cartSchema from "../validations/cartValidation";
 

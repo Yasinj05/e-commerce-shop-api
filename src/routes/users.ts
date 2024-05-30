@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
-import User, { IUser } from "../models/user";
+import User, { IUser } from "../models/User";
 import {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,

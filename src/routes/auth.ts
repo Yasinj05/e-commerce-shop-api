@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import _ from "lodash";
-import User from "../models/user";
+import User from "../models/User";
 import userSchema from "../validations/userValidation";
 import validate from "../validations/validate";
 import bcrypt from "bcrypt";

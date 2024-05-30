@@ -3,7 +3,7 @@ import {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } from "./verifyToken";
-import Product, { IProduct } from "../models/product";
+import Product, { IProduct } from "../models/Product";
 import validate from "../validations/validate";
 import productSchema from "../validations/productValidation";
 
